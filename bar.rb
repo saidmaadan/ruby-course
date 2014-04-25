@@ -34,6 +34,6 @@ def happy_discount
 end
 
 def happy_discount=(new_happy_discount)
-  if
+
 end
 end
