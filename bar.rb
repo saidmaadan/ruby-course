@@ -1,8 +1,8 @@
 require 'time' # you're gonna need it
 
 class Bar
-
-attr_accessor :name, :menu_items, :price, :happy_discount
+attr_reader :name
+attr_accessor :menu_items, :happy_discount
 
   def initialize(name)
     @name = name
@@ -11,10 +11,10 @@ attr_accessor :name, :menu_items, :price, :happy_discount
 end
 
 def add_menu_item(item, price)
-  @menu_items << menu_items
-  # new_item = MenuItem.new(item, price)
-  # @menu_items << new_item
-end
+    menu_item =Item.new(item, price)
+    @menu_items << menu_item
+  end
+
 
 def happy_hour?
   if Time.now > Time.parse("3pm") && Time.now < Time.parse("4pm")
@@ -33,7 +33,22 @@ def happy_discount
   end
 end
 
-def happy_discount=(new_happy_discount)
-
+def happy_discount=(happy_discount)
+if @happy_discount > 1
+   @happy_discount = 1
+elsif @happy_discount < 0
+      @happy_discount = 0
+else  @happy_discount
 end
+end
+end
+
+class Item
+  attr_accessor :name, :price
+
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+
 end
