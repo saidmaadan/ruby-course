@@ -44,6 +44,18 @@ else
    @happy_discount = 0
 end
 end
+
+def discount
+  @price/2
+end
+
+def get_price(price)
+  if Time.now.hour == happy_hour?
+  price - discount
+  else
+  price
+end
+end
 end
 
 class Item
@@ -55,3 +67,19 @@ class Item
   end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
