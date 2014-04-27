@@ -91,7 +91,7 @@ describe Bar do
     it "is not happy hour otherwise" do
       # TODO: CONTROL TIME
       expect(@bar.happy_discount).to eq 0
-      expect(@bar.happy_hour?).to eq(true)
+      expect(@bar.happy_hour?).to eq(false)
     end
   end
 
