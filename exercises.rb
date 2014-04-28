@@ -14,13 +14,19 @@ module Exercises
   # Exercise 1
   #  - Returns the number of elements in the array
   def self.ex1(array)
-    # TODO
+  numElement = []
+  array.each do |arr|
+    numElenment ==  array.length
+  end
+    numElement
   end
 
   # Exercise 2
   #  - Returns the second element of an array
   def self.ex2(array)
-    # TODO
+    array.each do |arr|
+     puts arr[1]
+    end
   end
 
   # Exercise 3
@@ -32,8 +38,15 @@ module Exercises
   # Exercise 4
   #  - Returns the max number of the given array
   def self.ex4(array)
-    # TODO
-  end
+    maxim = array.first
+    array.each do |array|
+      if array > maxim
+        maxim = array
+      end
+    end
+    maxim
+end
+
 
   # Exercise 5
   #  - Iterates through an array and `puts` each element
