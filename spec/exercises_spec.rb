@@ -54,13 +54,10 @@ end
 end
 
 describe '.ex6' do
-  it "returns the last item in the array to panda " do
-
-
-  expect(Exercises.ex1(array[1, 3, 4])).to eq(3)
-  expect(Exercises.ex1([1, 3, 4, 5])).to eq(4)
+it "should add string to the end of array if it exist" do
+      expect(Exercises.ex6(['hey', '34', 'str','sell'])).to eq('hey', '34', 'sell', 'str')
+    end
   end
-end
 
 
 
