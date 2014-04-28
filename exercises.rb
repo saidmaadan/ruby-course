@@ -25,15 +25,16 @@ module Exercises
   #  - Returns the second element of an array
   def self.ex2(array)
     array.each do |arr|
-     puts arr[1]
+     arr[1]
     end
   end
 
   # Exercise 3
   #  - Returns the sum of the given array of numbers
   def self.ex3(array)
-    # TODO
+    array.reduce(:+)
   end
+
 
   # Exercise 4
   #  - Returns the max number of the given array
@@ -51,7 +52,9 @@ end
   # Exercise 5
   #  - Iterates through an array and `puts` each element
   def self.ex5(array)
-    # TODO
+    array.each do |arr|
+      puts arr
+    end
   end
 
   # Exercise 6
@@ -59,6 +62,7 @@ end
   #  - If the last item is already 'panda', update
   #    it to 'GODZILLA' instead
   def self.ex6(array)
+
     # TODO
   end
 
