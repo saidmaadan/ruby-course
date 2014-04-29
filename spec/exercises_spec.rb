@@ -89,7 +89,13 @@ describe 'ex9' do
 end
 
 
-
+describe RPSPlayer do
+  it "has name for the player" do
+  game = RPS.new("Mike", "Klop")
+  game.player1.should == "Mike"
+  game.player2.should == "Klop"
+  end
+end
 
 
 
