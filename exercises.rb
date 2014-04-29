@@ -14,20 +14,15 @@ module Exercises
   # Exercise 1
   #  - Returns the number of elements in the array
   def self.ex1(array)
-  numElement = []
-  array.each do |arr|
-    numElenment ==  array.length
-  end
-    numElement
+    array.length
   end
 
   # Exercise 2
   #  - Returns the second element of an array
   def self.ex2(array)
-    array.each do |arr|
-     arr[1]
+     array[1]
     end
-  end
+
 
   # Exercise 3
   #  - Returns the sum of the given array of numbers
@@ -52,8 +47,8 @@ end
   # Exercise 5
   #  - Iterates through an array and `puts` each element
   def self.ex5(array)
-    array.each do |arr|
-      puts arr
+    for arr in 0...array.length
+      puts array[arr]
     end
   end
 
@@ -69,9 +64,10 @@ end
   #  - If the string `str` exists in the array,
   #    add `str` to the end of the array
   def self.ex7(array, str)
-    # if array.include?("str")
-    #   array.push("str")
-    # end
+    if array.include?(str)
+      array.push(str)
+      array.last
+    end
   end
 
   # Exercise 8
