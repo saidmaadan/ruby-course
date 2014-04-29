@@ -57,8 +57,16 @@ end
   #  - If the last item is already 'panda', update
   #    it to 'GODZILLA' instead
   def self.ex6(array)
-
+    last_item = array[-1]
+    if last_item == 'panda'
+       last_item = 'GODZILLA'
+       last_item
+    else
+      last_item = 'panda'
+      last_item
   end
+end
+
 
   # Exercise 7
   #  - If the string `str` exists in the array,
