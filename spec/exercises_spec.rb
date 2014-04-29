@@ -64,9 +64,8 @@ end
 
 describe 'ex8' do
   it "iterates throught the people hash and prints out key and values" do
-    # Exercises.ex8({ :name => "Bob"})
-    STDOUT.should_receive(:puts).with("Bob" : "Builder")
-    Exercises.ex8({ :name => "Bob", :occupation => "Builder"})
+    STDOUT.should_receive(:puts).with("Builder")
+    Exercises.ex8({ :occupation => "Builder"})
   end
 end
 
