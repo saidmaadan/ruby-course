@@ -117,7 +117,7 @@ class RPS
   # RPS through the terminal.
   attr_reader :player1, :player2
   def initialize(player1, player2)
-    @player1 = player1.capitilize
+    @player1 = player1.capitalize
     @player2 = player2.capitalize
   end
 end
