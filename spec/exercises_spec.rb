@@ -69,6 +69,14 @@ describe 'ex8' do
   end
 end
 
+describe 'ex9' do
+  it " should returns true if given time is a leap year" do
+    result = Exercises.ex9(Time.new)
+    expect(result).to eq(false)
+  end
+end
+
+
 
 
 

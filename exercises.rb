@@ -85,8 +85,11 @@ end
   #    Otherwise, returns `false`
   # Hint: Google for the wikipedia article on leap years
   def self.ex9(time)
-    # TODO
-  end
+    if Time.new.year % 4 == 0
+      true
+    else
+      false
+    end
 end
 
 
