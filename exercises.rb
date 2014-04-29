@@ -91,6 +91,7 @@ end
       false
     end
 end
+end
 
 
 class RPS
@@ -107,7 +108,6 @@ class RPS
   # You will be using this class in the following class, which will let players play
   # RPS through the terminal.
 end
-
 
 require 'io/console'
 class RPSPlayer
