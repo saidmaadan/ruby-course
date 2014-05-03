@@ -19,7 +19,7 @@ describe "Ruby Review: You" do
 
   describe "Your knowledge of Hashes" do
 
-    xyou "know how to change a value in a hash" do
+    you "know how to change a value in a hash" do
       wardrobe = {
           "top compartment" => {
             :item => "neck tie"

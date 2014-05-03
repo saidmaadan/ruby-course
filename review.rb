@@ -10,10 +10,10 @@ module GettersSetters
   # # # # # #
 
   class Doctor
-    attr_reader :skill
+    attr_accessor :skill
 
     def initialize
-      @skill = "bedside manners"
+      @skill = "resent"
     end
     # TODO: Write a setter method for @skill
   end
