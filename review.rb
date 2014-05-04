@@ -28,6 +28,7 @@ class HashProblems
 
   def self.update_top_compartment_item(wardrobe_hash)
     # TODO: Complete this method by writing A SINGLE LINE
+    wardrobe_hash['top compartment'][:item] = 'fake beard'
   end
 
 end
@@ -41,6 +42,7 @@ class ArrayProblems
 
   def self.add_cat_to_array(array)
     # TODO: Complete this method
+   array << {:cat => 'Pogo'}
   end
 
   # # # # # # #
@@ -49,6 +51,8 @@ class ArrayProblems
 
   def self.list_wardrobe_item_sizes(array)
     # TODO: Use the map method to create an array of wardrobe item sizes
+    array.map do |arr| arr[:size]
+    end
   end
 
   # # # # # # #
@@ -57,6 +61,8 @@ class ArrayProblems
 
   def self.tell_me_the_weather(array)
     # TODO: Use the map method to create an array of weather descriptions
+    array.map do |arr| 'It is ' + arr
+    end
   end
 
   # # # # # # #
@@ -65,6 +71,8 @@ class ArrayProblems
 
   def self.list_my_hats(array)
     # TODO: Use the map method to create an array of sized hats
+    array.map do |arr| arr[:size] + " " + arr[:style]
+    end
   end
 end
 
