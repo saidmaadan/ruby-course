@@ -1,3 +1,5 @@
+require 'terminal.rb'
+
 module TM
   class DB
     attr_reader :tasks, :projects
