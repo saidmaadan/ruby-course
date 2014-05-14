@@ -2,8 +2,22 @@ require 'time'
 
 class TM::Task
 
+<<<<<<< HEAD
   attr_reader   :status, :complete, :created_at
   attr_accessor :name, :id, :project_id, :employee_id, :priority_no, :description,
+=======
+  attr_accessor  :priority_no, :status, :project_id_counter, :complete
+  attr_reader :id, :project_id, :description, :created_at
+
+  def initialize(project_id, description, priority_no)
+    @project_id = project_id
+    @description = description
+    @priority_no = priority_no
+    @id = self.class.project_id_counter
+    @@project_id_counter += 1
+    @created_at = Time.now
+    @complete ||= []
+>>>>>>> c90360d95e15a8646743c5737efd2e0b2ff0a3e4
 
   def initialize(data)
     @name = data[:name] ||= []
