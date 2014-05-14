@@ -4,7 +4,7 @@ require 'pry-debugger'
 
 class TM::TerminalClient
   def self.start
-    manager = TM::TerminalClient.new
+    manager = TM::ProjectManager.new
     @@user = ""
     @@exit = false
     while @@exit == false
@@ -29,6 +29,8 @@ class TM::TerminalClient
         manage.help
       elsif user_input == "list"
         manage.get_projects
+      elsif user_input == "create Name"
+        manage.create_new_project
       elsif user_input == "show"
         manage.show_tasks
       elsif user_input == "add"
@@ -37,8 +39,6 @@ class TM::TerminalClient
         manage.tasks_record
       elsif user_input == "mark"
         manage.complete_task
-      elsif "create"
-        manage.create_new_project
       elsif user_input == "exit"
         @@exit = true
       else puts "Sorry #{user_input} is not a valid command"

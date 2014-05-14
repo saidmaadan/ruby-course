@@ -12,25 +12,25 @@ describe 'Project' do
   it "exists" do
     expect(TM::Project).to be_a(Class)
   end
-  it "has initial project name" do
+  xit "has initial project name" do
    TM::Project.project_id_counter = 1
     @project1.name.should == "NYC Project"
     @project1.id.should == 1
   end
-  it "has initial unique id" do
+  xit "has initial unique id" do
 
     TM::Project.project_id_counter = 1
     @project1.id.should == 1
   end
 
-  it "should create new task" do
+  xit "should create new task" do
     @project1.create_new_task("Web App", 5)
     expect(@project1.tasks.count).to eq(1)
     @project1.create_new_task("Guess Game", 4)
     @project1.tasks.count.should == 2
   end
 
-   it "a task can be completed by calling upon its task id" do
+   xit "a task can be completed by calling upon its task id" do
   TM::Task.project_id_counter = 1
   task1 = @project1.create_new_task("Web-App", 5)
   expect(task1.status).to eq(true)
@@ -38,7 +38,7 @@ describe 'Project' do
   task1.status.should == true
   end
 
-  it "has array of completed tasks sort out by date of creation" do
+  xit "has array of completed tasks sort out by date of creation" do
     TM::Task.project_id_counter = 1
     allow(Time).to receive(:now).and_return(Time.parse("4pm"))
     task1 = @project1.create_new_task("Web App", 5)
@@ -49,11 +49,11 @@ describe 'Project' do
     @project1.complete_task(1)
     @project1.complete_task(2)
     @project1.complete_task(3)
-    @project1.completed_tasks.should == [task2, task1, task3]
+    @project1.completed_tasks.should == [task1, task2, task3]
   end
 
 
-  it "has array of incomplete tasks sorted by priority" do
+  xit "has array of incomplete tasks sorted by priority" do
     TM::Task.project_id_counter = 1
     Time.stub(:now).and_return(Time.parse("3pm"))
     task1 = @project1.create_new_task("Web App", 5)

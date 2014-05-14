@@ -34,7 +34,7 @@ class TM::ProjectManager
   def create_new_project(name)
     project = TM::Project.new(name)
     @projects_list << project
-    puts "#{project.name} project created"
+    puts "#{project.name} project created at #{@created_at}"
   end
 
   def show_tasks(project_id)
@@ -77,7 +77,7 @@ end
       puts "You have to create your first projects and tasks"
     else
       task2 = @tasks_list.select{|task| task.id == task_id.to_i}
-      task2.first.status = "complete"
+      task2.first.status = true
    end
   end
 

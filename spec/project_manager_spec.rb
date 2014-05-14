@@ -5,16 +5,16 @@ describe 'ProjectManager' do
   before (:each) do
     @manager = TM::ProjectManager.new
   end
-  it "has initial empty array projects and tasks list" do
+  xit "has initial empty array projects and tasks list" do
    @manager.listed_projects.should == []
    @manager.listed_tasks.should == []
   end
 
-  it "gives a specific input when help method is called" do
+  xit "gives a specific input when help method is called" do
     @manager.help.should == "Follow the instruction and have fun!"
   end
 
-  it "allows you to add a project and that project is stored in the projects array" do
+  xit "allows you to add a project and that project is stored in the projects array" do
     @manager.get_projects.should == "You need to create your project first"
     @manager.create_new_project("project1")
     @manager.create_new_project("project2")
@@ -26,7 +26,7 @@ describe 'ProjectManager' do
   end
 
 
-it "has the method to add tasks to a project" do
+xit "has the method to add tasks to a project" do
   TM::Project.project_id_counter = 1
   @manager.add_task("5", "project AB", "6").should == "You need to create your project first"
   @manager.create_new_project("project1")
@@ -39,7 +39,7 @@ it "has the method to add tasks to a project" do
   @manager.listed_tasks.count.should == 2
 end
 
-it "has method to complete task" do
+xit "has method to complete task" do
   TM::Project.project_id_counter = 1
   TM::Task.project_id_counter = 1
   @manager.create_new_project("project")

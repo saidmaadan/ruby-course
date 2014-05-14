@@ -1,12 +1,13 @@
+
 require 'spec_helper'
 
 describe 'Task' do
 
-  it "exists" do
+  xit "exists" do
     expect(TM::Task).to be_a(Class)
   end
 
-  it "has initialize project id, description, priority number, and id" do
+  xit "has initial project id, description, priority number, and id" do
     TM::Task.project_id_counter = 1
     task = TM::Task.new(1, "Video chat application", 5)
     expect(task.project_id).to eq(1)
