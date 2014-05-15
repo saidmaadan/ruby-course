@@ -14,18 +14,18 @@ module TM
     end
 
     def create_project(data)
-      @project_count += 1
-      data[:id] = @project_count
-      data = @projects[data[:id]]
+      data[:id] ||= @project_count +1
+      return nil if @projects[data[:id]]
+      @project_count +=1
+      @projects[data[:id]] = data
       build_project(data)
-    end
+      end
 
 
     def get_project(id)
       data = @projects[id]
       if !data.nil?
         build_project(data)
-      # TM::Project.new(data[:name], data[:id])
       end
     end
 
@@ -40,17 +40,19 @@ module TM
 
     def list_projects
       list = []
-      @projects.each do |id, data| list << build_project(data)
+      @projects.each do |id, data|
+        list << build_project(data)
       end
       list
-  end
+    end
 
     def create_task(data)
-      data[:id] ||= @task_count + 1
-      return nil if @tasks[data[:id]]
-      @task_count +=1
+      @task_count += 1
+      data[:id] = @tasks_count
+      data[:create_time] = Time.now
+      data[:complete] = false
       @tasks[data[:id]] = data
-
+      build_task(data)
     end
 
     def get_task(id)
@@ -58,10 +60,10 @@ module TM
     end
 
     def update_task(id, data)
-       return nil unless @tasks[id]
+      return nil unless @tasks[id]
       @tasks[id].merge!(data)
-      build_task
-    end
+      build_task(@tasks[id])
+  end
 
     def destroy_task(id)
       @tasks.delete(id)
@@ -76,66 +78,115 @@ module TM
 
     def get_employee(id)
       data = @projects[id]
-      if !data.nil?
-      build_employee
+      build_employee(data) if !data.nil?
     end
 
     def update_employee(id, data)
       @employees[id].merge!(data)
-      build_employee
+      build_employee(@employee[id])
     end
 
     def delete_employee(id)
       @employees.delete(id)
     end
 
-    def add_task_to_project(task)
-        task = Task.new(description, priority, project_id)
-        @tasks[task.id] = task
-        @tasks[task.id]
+    def add_task_to_project(data)
+     TM::Task.new(data[:description], [:priority_no], [:project_id])
+      data = @tasks[data.id]
+
+      @tasks[task.id]
+      # You're not creating the relationship between task and project
     end
 
-    def get_project_membership(id)
-        project_employees = []
-        @memberships.select do |member|
-          member.select do |key, value|
-            project_employees << value if key == pid
-          end
+    def get_all_tasks_for_project(project_id)
+      tasks = []
+      @tasks.select  do |a, b|
+        if b[:project_id] == project_id
+          tasks.push(build_task(b))
         end
-        project_employees
+        tasks
       end
+    end
 
-    def get_employee_membership(id)
-      employee_projects = []
-      @memberships.select do |member|
-        member.select do |key, value|
-          employee_projects << key if value == id
-        end
+    def get_all_completed_tasks_for_project(project_id)
+      completed_tasks = @tasks.values.select do |task|
+      task.project_id == project_id && task.completed
+    end
+     completed_tasks
+    end
+
+     def get_remaining_tasks_for_project(project_id)
+      remaining_tasks = @tasks.values.select do |task|
+      task.project_id == project_id && !task.completed
+    end
+     remaining_tasks
+    end
+
+    def get_completed_employee_tasks(employee_id)
+      employee_tasks = @tasks.values.select do
+       |task| task.employee_id == employee_id && task.completed == true
+     end
+     employee_tasks
+    end
+
+    def get_remaining_employee_tasks(employee_id)
+      employee_tasks = @tasks.values.select do |task|
+        task.employee_id == employee_id && task.completed == false
       end
-      employee_projects
+      employee_tasks
     end
 
     def add_employee_to_project(project_id, employee_id)
-        project = get_project(project_id)
-        employee = get_employee(employee_id)
-        @memberships.push({project.id => employee.id})
+      project = get_project(project_id)
+      employee = get_employee(employee_id)
+      @memberships.push({
+        p_id: project.id,
+        e_id: employee.id}
+        )
+    end
+
+    def get_project_membership(project_id)
+      # implement this
+      project_employees = []
+      @memberships.select do |member|
+        member.select do |key, value|
+          project_employees << value if key == project_id
+        end
+      end
+      project_employees
       end
 
+    def get_employee_membership(employee_id)
+      employee_projects = []
+      @memberships.select do |member|
+        member.select do |key, value|
+          employee_projects << key if value == employee_id
+        end
+      end
 
+      employee_projects
+    end
 
     def build_employee(data)
-      Employee.new(data[:name], data[:id])
+      TM::Employee.new(data[:name], data[:id])
     end
 
     def build_task(data)
-      Task.new(data[:name], data[:desc], data[:id])
+      TM::Task.new(data)
+      #TM::Task.new(data[:name], data[:id], data[:description], data[:create_time], data[:complete])
     end
 
     def build_project(data)
-      Project.new(data[:name], data[:id])
+      TM::Project.new(data)
     end
   end
+
+  def self.db
+    @__db_instance ||= DB.new
+  end
 end
+
+
 
 
 

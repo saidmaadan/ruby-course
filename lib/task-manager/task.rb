@@ -2,35 +2,51 @@ require 'time'
 
 class TM::Task
 
-<<<<<<< HEAD
-  attr_reader   :status, :complete, :created_at
-  attr_accessor :name, :id, :project_id, :employee_id, :priority_no, :description,
-=======
-  attr_accessor  :priority_no, :status, :project_id_counter, :complete
-  attr_reader :id, :project_id, :description, :created_at
+  attr_reader   :status, :created_at, :completed_at, :completed, :overdue
+  attr_accessor :name, :id, :project_id, :employee_id, :priority_no, :description
 
-  def initialize(project_id, description, priority_no)
-    @project_id = project_id
-    @description = description
-    @priority_no = priority_no
-    @id = self.class.project_id_counter
-    @@project_id_counter += 1
-    @created_at = Time.now
-    @complete ||= []
->>>>>>> c90360d95e15a8646743c5737efd2e0b2ff0a3e4
+
 
   def initialize(data)
-    @name = data[:name] ||= []
+    @name = data
+    @id = id
+    @description = description
+    @name = data[:name]
     @id = data[:id]
-    @project_id = data[:project_id]
     @description = data[:description]
     @priority_no = data[:priority_no]
+    @project_id = data[:project_id]
     @employee_id = data[:employee_id]
-    @created_at = Time.new
-    @complete ||= []
-
-
+    @completed_at = Time.now
+    @created_at = data[:create_time]
+    @completed = data[:complete]
   end
+
+  def mark_task_complete(task_id)
+      task = get_task(task_id)
+      task.completed = true
+      # update the database
+
+      task
+    end
+end
+
+
+
+  # def mark_completed
+  #   @completed = true
+  #   @completed_at = Time.now
+  # end
+
+  # def mark_incomplete
+  #   @completed = false
+  #   @completed_at = nil
+  # end
+
+  # def overdue?
+  #   Time.now > @date_due
+  # end
+
 
 #   def complete?
 #     @complete
@@ -61,4 +77,3 @@ class TM::Task
 #   @@project_id_counter += 1
 #   temp
 # end
-end

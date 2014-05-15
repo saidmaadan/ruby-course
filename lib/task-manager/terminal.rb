@@ -46,7 +46,7 @@ class TM::TerminalClient
         end
       end
     end
-end
+  end
 
 
 

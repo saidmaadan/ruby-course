@@ -9,7 +9,7 @@ describe 'Project' do
     @project1 = TM::Project.new("NYC Project")
   end
 
-  it "exists" do
+  xit "exists" do
     expect(TM::Project).to be_a(Class)
   end
   xit "has initial project name" do
