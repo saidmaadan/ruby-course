@@ -5,6 +5,7 @@ class Tweet::SQLDB
   end
 
   def build_text_tweet(data)
+    Tweet::TextTweet.new(data[:content], data[:tags], data[:id])
   end
 
   def create_text_tweet(data)
@@ -24,7 +25,7 @@ class Tweet::SQLDB
 
   def build_pic_tweet(data)
   end
-  
+
   def create_pic_tweet(data)
   end
 

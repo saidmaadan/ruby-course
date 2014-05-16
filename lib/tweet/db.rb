@@ -27,13 +27,13 @@ class Tweet::DB
     @next_tt_id += 1
 
     # Runs get_or_create_tag on each tag passed in
-    data[:tags].each do |tag|
-      tag_obj = get_or_create_tag({tag: tag})
-      # binding.pry
-      create_text_tweet_tag(data[:id], tag_obj.id)
-    end
+    # data[:tags].each do |tag|
+    #   tag_obj = get_or_create_tag({tag: tag})
+    #   # binding.pry
+    #   create_text_tweet_tag(data[:id], tag_obj.id)
+    # end
 
-    data.delete(:tags)
+    # data.delete(:tags)
     @text_tweets[data[:id]] = data
     build_text_tweet(data)
   end
@@ -64,7 +64,7 @@ class Tweet::DB
   #########
 
   # For creating a text_tweet_tag
-  # Expects two inputs: tt_id and tag_id representing the ids of the tweet and 
+  # Expects two inputs: tt_id and tag_id representing the ids of the tweet and
   # the tag
   # Adds the text_tweet_tag to the database
   # Returns the id of the new text_tweet_tag
@@ -104,7 +104,7 @@ class Tweet::DB
     end
 
     @pic_tweets[data[:id]] = data
-    
+
     build_pic_tweet(data)
   end
 
