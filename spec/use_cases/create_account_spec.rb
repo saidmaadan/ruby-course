@@ -4,13 +4,18 @@ describe DoubleDog::CreateAccount do
 
   let(:use_case) do
     use_case = DoubleDog::CreateAccount.new
-    #expect(use_case).to receive(:admin_session?).and_return(true)
+    expect(use_case).to receive(:admin_session?).and_return(@admin_session)
+    use_case
+  end
+
+  before (:each) do
+    @admin_session = true
   end
 
 
   describe 'Validation' do
     it "requires the creator to be an admin" do
-      expect(use_case).to receive(:admin_session?).and_return(false)
+      @admin_session = false
 
       result = use_case.run(:session_id => 'nope', :username => 'a', :password => 'b')
       expect(result[:success?]).to eq false
@@ -18,7 +23,6 @@ describe DoubleDog::CreateAccount do
     end
 
     it "requires a username" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:session_id => 0, :password => 'bluh')
       expect(result[:success?]).to eq false
@@ -26,7 +30,6 @@ describe DoubleDog::CreateAccount do
     end
 
     it "requires a username to be at least three characters" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:session_id => 0, :username => 'ab', :password => 'bluh')
       expect(result[:success?]).to eq false
@@ -34,7 +37,6 @@ describe DoubleDog::CreateAccount do
     end
 
     it "requires a password" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:session_id => 0, :username => 'bob')
       expect(result[:success?]).to eq false
@@ -42,7 +44,6 @@ describe DoubleDog::CreateAccount do
     end
 
     it "requires a password with at least three characters" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:session_id => 0, :username => 'bob', :password => '12')
       expect(result[:success?]).to eq false
@@ -51,7 +52,6 @@ describe DoubleDog::CreateAccount do
   end
 
   it "creates an account" do
-    expect(use_case).to receive(:admin_session?).and_return(true)
 
     result = use_case.run(:session_id => 0, :username => 'bob', :password => 'letmein')
     expect(result[:success?]).to eq true

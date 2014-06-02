@@ -5,12 +5,17 @@ describe DoubleDog::CreateItem do
 
   let(:use_case) do
     use_case = DoubleDog::CreateItem.new
-    #expect(use_case).to receive(:admin_session?).and_return(true)
+    expect(use_case).to receive(:admin_session?).and_return(@admin_session)
+    use_case
+  end
+
+  before (:each) do
+    @admin_session = true
   end
 
   describe 'Validation' do
     it "requires the user to be an admin" do
-      expect(use_case).to receive(:admin_session?).and_return(false)
+      @admin_session = false
 
       result = use_case.run(:name => "doesn't matter", :price => 5)
       expect(result[:success?]).to eq false
@@ -18,7 +23,6 @@ describe DoubleDog::CreateItem do
     end
 
     it "requires a name" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:name => nil, :price => 5)
       expect(result[:success?]).to eq false
@@ -26,7 +30,6 @@ describe DoubleDog::CreateItem do
     end
 
     it "requires the name to be at least one character" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:name => '', :price => 5)
       expect(result[:success?]).to eq false
@@ -34,7 +37,6 @@ describe DoubleDog::CreateItem do
     end
 
     it "requires a price" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:name => 'x', :price => nil)
       expect(result[:success?]).to eq false
@@ -42,7 +44,6 @@ describe DoubleDog::CreateItem do
     end
 
     it "requires a price to be more than fiftey cents" do
-      expect(use_case).to receive(:admin_session?).and_return(true)
 
       result = use_case.run(:name => 'y', :price => 0.4)
       expect(result[:success?]).to eq false
@@ -51,7 +52,6 @@ describe DoubleDog::CreateItem do
   end
 
   it "creates an item" do
-    expect(use_case).to receive(:admin_session?).and_return(true)
 
     result = use_case.run(:name => 'smoothie', :price => 10)
     expect(result[:success?]).to eq true

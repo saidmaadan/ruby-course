@@ -5,9 +5,7 @@ describe DoubleDog::CreateOrder do
 
   let(:use_case) do
     use_case = DoubleDog::CreateOrder.new
-    #expect(use_case).to receive(:admin_session?).and_return(true)
   end
-
 
   describe 'validation' do
     it "requires an employee to be logged in" do
