@@ -1,5 +1,5 @@
 module DoubleDog
-  class CreateAccount
+  class CreateAccount < UseCase
 
     def run(params)
       return failure(:not_admin) unless admin_session?(params[:session_id])
@@ -21,16 +21,6 @@ module DoubleDog
 
     def valid_password?(password)
       password != nil && password.length >= 3
-    end
-
-  private
-
-    def failure(error_name)
-      return :success? => false, :error => error_name
-    end
-
-    def success(data)
-      return data.merge(:success? => true)
     end
   end
 end

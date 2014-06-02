@@ -13,16 +13,20 @@ module DoubleDog
         @order_id_counter = 600
       end
 
+      def build_user(attrs)
+        DoubleDog::User.new(attrs[:id], attrs[:username], attrs[:password], attrs[:admin])
+      end
+
       def create_user(attrs)
         new_id = (@item_id_counter += 1)
         @users[new_id] = attrs
         attrs[:id] = new_id
-        User.new(attrs[:id], attrs[:username], attrs[:password], attrs[:admin])
+        build_user(attrs)
       end
 
       def get_user(id)
         attrs = @users[id]
-        User.new(attrs[:id], attrs[:username], attrs[:password], attrs[:admin])
+        build_user(attrs)
       end
 
       def create_session(attrs)
@@ -30,6 +34,10 @@ module DoubleDog
         @sessions[new_id] = attrs
         return new_id
       end
+
+      # def build_get_user_by_session_id(sid)
+      #   DoubleDog::User.new(user_attrs[:id], user_attrs[:username], user_attrs[:password], user_attrs[:admin])
+      # end
 
       def get_user_by_session_id(sid)
         return nil if @sessions[sid].nil?
